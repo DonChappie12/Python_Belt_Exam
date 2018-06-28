@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h2{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h3>Add Job</h3>
+        <a href="/logout">Logout</a>
+        <a href="/dashboard">Back</a>
+    </div>
+    <div>
+        <form action="/createJob" method="POST">
+            {% csrf_token %}
+            <p>Title: <input type="text" name="title"></p>
+            <p>Description: <textarea name="description" cols="30" rows="10"></textarea></p>
+            <p>Location: <input type="text" name="location"></p>
+            <input type="submit" value="Add Job!">
+        </form>
+    </div>
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                    <h2{% if message.tags %} class="{{ message.tags }}"{%    endif %}>{{ message }}</h2>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

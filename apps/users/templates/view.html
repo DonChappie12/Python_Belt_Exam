@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <a href="/logout">Logout</a>
+        <a href="/dashboard">Back</a>
+    </div>
+    <div class="work">
+        {% for job in jobs %}
+        <h3>{{job.title}}</h3>
+        <br>
+        <p>{{job.description}}</p>
+        <br>
+        <p>Posted by: {{job.created_by.first_name}} {{job.created_by.last_name}}</p>
+        <br>
+        <p>Posted On: {{job.created_at}}</p>
+        {% endfor %}
+    </div>
+    {% for job in jobs %}
+    <a href="/join/{{job.id}}"><h2>Add To My Jobs</h2></a>
+    {% endfor %}
+</body>
+</html>

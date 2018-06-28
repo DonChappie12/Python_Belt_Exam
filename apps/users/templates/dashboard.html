@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <h3>Welcome {{user.first_name}} {{user.last_name}}</h3>
+        <a href="/logout">Logout</a>
+        <h3><a href="/addJob">Add Job</a></h3>
+    </div>
+    <div class="inline">
+        <table>
+            <thead>
+                <tr>
+                    <th>Job</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in all_jobs %}
+                <tr>
+                    <td>{{job.title}}</td>
+                    <td>{{job.location}}</td>
+                    <td>
+                        <a href="/view/{{job.id}}">View</a>
+                        <a href="/join/{{job.id}}">Add</a>
+                        {% if request.session.user_id == job.created_by.id %}
+                        <a href="/edit/{{job.id}}">Edit</a>
+                        <a href="/delete/{{job.id}}">Cancel</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="inline">
+        <table>
+            <thead>
+                <tr>
+                    <th>My Jobs</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in my_jobs %}
+                <tr>
+                    <td>{{job.title}}</td>
+                    <td>
+                        <a href="/view/{{job.id}}">View</a>
+                        <a href="/delete/{{job.id}}">Done</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
